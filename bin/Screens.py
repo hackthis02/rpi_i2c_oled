@@ -16,12 +16,12 @@ class Display:
     SCREENSHOT_PATH = "./img/examples/"
 
     def __init__(self, busnum = None, screenshot = False, rotate = False, config = None, show_icons = True,
-                 compact = False, show_hint = False):
+                 compact = False, show_hint = False, size = '32'):
         self.logger = logging.getLogger('Display')
 
         if not isinstance(busnum, int):
             busnum = Display.DEFAULT_BUSNUM
-        if config and config.get_option_value('screen_size') == '64':
+        if size == '64':
             self.display = SSD1306_128_64(busnum)
         else:
             self.display = SSD1306_128_32(busnum)

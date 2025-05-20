@@ -121,9 +121,10 @@ class Config:
             show_icons = self.get_option_value('show_icons')
             show_hint = self.get_option_value('show_hint')
             compact = self.get_option_value('compact')
+            size = self.get_option_value('screen_size')
 
             self.display = Display(busnum=busnum, screenshot=screenshot,
-                                   rotate=rotate, Config = config, show_icons=show_icons,
+                                   rotate=rotate, size = size, show_icons=show_icons,
                                    show_hint=show_hint, compact=compact)
 
         except Exception as e:
