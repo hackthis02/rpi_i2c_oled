@@ -123,7 +123,7 @@ class Config:
             compact = self.get_option_value('compact')
 
             self.display = Display(busnum=busnum, screenshot=screenshot,
-                                   rotate=rotate, config = Config, show_icons=show_icons,
+                                   rotate=rotate, Config = config, show_icons=show_icons,
                                    show_hint=show_hint, compact=compact)
 
         except Exception as e:
