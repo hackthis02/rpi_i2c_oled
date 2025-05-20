@@ -1,9 +1,11 @@
-import json
 import logging
+import json
 import signal
-from bin.Utils import Utils, HassioUtils
-from bin.Screens import *  
+
+from bin.Screens import *
 from bin.Scroller import Scroller
+from bin.Utils import HassioUtils, Utils
+
 
 class Config:
     DEFAULT_DURATION = 10
@@ -35,6 +37,9 @@ class Config:
         'datetime_format': 'datetime_format',
         'welcome_screen_text': 'welcome_screen_text',
         'rotate': 'rotate',
+        'show_icons': 'show_icons',
+        'show_hint': 'show_hint',
+        'compact': 'compact',
         'supervizor_token': 'supervizor_token',
         'screen_size': 'screen_size'
     }
@@ -113,7 +118,13 @@ class Config:
                 screenshot = False
 
             rotate = self.get_option_value('rotate')
-            self.display = Display(busnum, screenshot, rotate, self)
+            show_icons = self.get_option_value('show_icons')
+            show_hint = self.get_option_value('show_hint')
+            compact = self.get_option_value('compact')
+
+            self.display = Display(busnum=busnum, screenshot=screenshot,
+                                   rotate=rotate, show_icons=show_icons,
+                                   show_hint=show_hint, compact=compact)
 
         except Exception as e:
             raise Exception("Could not create display. Check your i2c bus with 'ls /dev/i2c-*'.")
