@@ -16,7 +16,7 @@ class Display:
     SCREENSHOT_PATH = "./img/examples/"
 
     def __init__(self, busnum = None, screenshot = False, rotate = False, config = None, show_icons = True,
-                 compact = False, show_hint = False, size = '32', icon_stats='text'):
+                 compact = False, show_hint = False, size = '32', icon_stats = 'text'):
         self.logger = logging.getLogger('Display')
 
         if not isinstance(busnum, int):
@@ -536,10 +536,10 @@ class StatsScreen(BaseScreen):
         storage =  Utils.shell_cmd("df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'")
 
         if(self.icon_stats == 'text'):
-            self.display.draw.text((0, 0), "IP: " + ipv4, font=self.font(16), fill=255)Add commentMore actions
+            self.display.draw.text((0, 0), "IP: " + ipv4, font=self.font(16), fill=255)
             self.display.draw.text((0, 16), "CPU: " + str(cpu) + "LA", font=self.font(16), fill=255)
             self.display.draw.text((80, 16), temp, font=self.font(16), fill=255)
-            self.display.draw.text((0, 32), mem, font=self.font(16), fill=255)Add commentMore actions
+            self.display.draw.text((0, 32), mem, font=self.font(16), fill=255)
             self.display.draw.text((0, 48), storage, font=self.font(16), fill=255)
         else:
             self.display.draw.text((x, top + 5), chr(62609), font=icon_font, fill=255)
