@@ -41,7 +41,7 @@ class Config:
         'show_hint': 'show_hint',
         'compact': 'compact',
         'supervizor_token': 'supervizor_token',
-        'screen_size': 'screen_size'
+        'screen_size': 'screen_size',
         'icon_stats': 'icon_stats'
     }
 
