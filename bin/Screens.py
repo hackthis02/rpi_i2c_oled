@@ -547,6 +547,8 @@ class StatsScreen(BaseScreen):
             self.display.draw.text((0, 32), mem, font=self.font(16), fill=255)
             self.display.draw.text((0, 48), storage, font=self.font(16), fill=255)
         else:
+            storage =  Utils.shell_cmd("df -h | awk '$NF==\"/\"{printf \"%d/%dGB\", $3,$2}'")
+            mem = Utils.shell_cmd("free -m | awk 'NR==2{printf \"%.2f%%\", $3*100/$2 }'")
             self.display.draw.text((0, 3), chr(62609), font=self.font(18, is_bold=False, is_icon=True), fill=255)
             self.display.draw.text((65, 3), chr(62776), font=self.font(18, is_bold=False, is_icon=True), fill=255)
             self.display.draw.text((0, 23), chr(63426), font=self.font(18, is_bold=False, is_icon=True), fill=255)
@@ -556,7 +558,7 @@ class StatsScreen(BaseScreen):
             self.display.draw.text((87, 3), str(mem), font=self.font(16), fill=255)
             self.display.draw.text((19, 23), str(storage), font=self.font(16), fill=255)
             self.display.draw.text((87, 23), str(cpu), font=self.font(16), fill=255)
-            self.display.draw.text((19, 43), str(ipv4), font=self.font(16), fill=255)
+            self.display.draw.text((19, 43), ipv4, font=self.font(16), fill=255)
 
         self.display.show()
         time.sleep(self.duration)
