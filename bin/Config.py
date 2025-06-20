@@ -42,6 +42,7 @@ class Config:
         'compact': 'compact',
         'supervizor_token': 'supervizor_token',
         'screen_size': 'screen_size'
+        'icon_stats': 'icon_stats'
     }
 
     logger = logging.getLogger('Config')
@@ -122,9 +123,10 @@ class Config:
             show_hint = self.get_option_value('show_hint')
             compact = self.get_option_value('compact')
             size = self.get_option_value('screen_size')
+            icon_stats = self.get_option_value('icon_stats')
 
             self.display = Display(busnum=busnum, screenshot=screenshot,
-                                   rotate=rotate, size = size, show_icons=show_icons,
+                                   rotate=rotate, size = size, icon_stats=icon_stats, show_icons=show_icons,
                                    show_hint=show_hint, compact=compact)
 
         except Exception as e:

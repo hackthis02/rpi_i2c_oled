@@ -16,7 +16,7 @@ class Display:
     SCREENSHOT_PATH = "./img/examples/"
 
     def __init__(self, busnum = None, screenshot = False, rotate = False, config = None, show_icons = True,
-                 compact = False, show_hint = False, size = '32'):
+                 compact = False, show_hint = False, size = '32', icon_stats='text'):
         self.logger = logging.getLogger('Display')
 
         if not isinstance(busnum, int):
@@ -33,6 +33,7 @@ class Display:
         self.compact = compact
         self.show_icons = show_icons
         self.show_hint = show_hint
+        self.icon_stats = icon_stats
         self.hint_right = True
 
         if self.show_icons and self.show_hint:
@@ -533,12 +534,24 @@ class StatsScreen(BaseScreen):
         temp = self.get_temp()
         mem = Utils.shell_cmd("free -m | awk 'NR==2{printf \"Mem: %s/%sMB %.2f%%\", $3,$2,$3*100/$2 }'")
         storage =  Utils.shell_cmd("df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'")
-        
-        self.display.draw.text((0, 0), "IP: " + ipv4, font=self.font(16), fill=255)
-        self.display.draw.text((0, 16), "CPU: " + str(cpu) + "LA", font=self.font(16), fill=255)
-        self.display.draw.text((80, 16), temp, font=self.font(16), fill=255)
-        self.display.draw.text((0, 32), mem, font=self.font(16), fill=255)
-        self.display.draw.text((0, 48), storage, font=self.font(16), fill=255)
+
+        if(self.icon_stats == 'text'):
+            self.display.draw.text((0, 0), "IP: " + ipv4, font=self.font(16), fill=255)Add commentMore actions
+            self.display.draw.text((0, 16), "CPU: " + str(cpu) + "LA", font=self.font(16), fill=255)
+            self.display.draw.text((80, 16), temp, font=self.font(16), fill=255)
+            self.display.draw.text((0, 32), mem, font=self.font(16), fill=255)Add commentMore actions
+            self.display.draw.text((0, 48), storage, font=self.font(16), fill=255)
+        else:
+            self.display.draw.text((x, top + 5), chr(62609), font=icon_font, fill=255)
+            self.display.draw.text((x + 65, top + 5), chr(62776), font=icon_font, fill=255)
+            self.display.draw.text((x, top + 25), chr(63426), font=icon_font, fill=255)
+            self.display.draw.text((x + 65, top + 25), chr(62171), font=icon_font, fill=255)
+            self.display.draw.text((x, top + 45), chr(61931), font=icon_font, fill=255)
+            self.display.draw.text((x + 19, top + 5), str(temp, 'utf-8'), font=font, fill=255)  
+            self.display.draw.text((x + 87, top + 5), str(mem, 'utf-8'), font=font, fill=255)
+            self.display.draw.text((x + 19, top + 25), str(storage, 'utf-8'), font=font, fill=255)
+            self.display.draw.text((x + 87, top + 25), str(cpu, 'utf-8'), font=font, fill=255)
+            self.display.draw.text((x + 19, top + 45), str(ipv4, 'utf-8'), font=font, fill=255)
 
         self.capture_screenshot()
         self.display.show()
