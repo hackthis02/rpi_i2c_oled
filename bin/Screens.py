@@ -535,7 +535,7 @@ class StatsScreen(BaseScreen):
         mem = Utils.shell_cmd("free -m | awk 'NR==2{printf \"Mem: %s/%sMB %.2f%%\", $3,$2,$3*100/$2 }'")
         storage =  Utils.shell_cmd("df -h | awk '$NF==\"/\"{printf \"Disk: %d/%dGB %s\", $3,$2,$5}'")
 
-        if(self.icon_stats == 'text'):
+        if(self.display.icon_stats == 'text'):
             self.display.draw.text((0, 0), "IP: " + ipv4, font=self.font(16), fill=255)
             self.display.draw.text((0, 16), "CPU: " + str(cpu) + "LA", font=self.font(16), fill=255)
             self.display.draw.text((80, 16), temp, font=self.font(16), fill=255)
