@@ -557,7 +557,7 @@ class StatsScreen(BaseScreen):
             self.display.draw.text((19, 3), str(temp), font=self.font(16), fill=255)  
             self.display.draw.text((87, 3), str(mem), font=self.font(16), fill=255)
             self.display.draw.text((19, 23), str(storage), font=self.font(16), fill=255)
-            self.display.draw.text((87, 23), str(cpu), font=self.font(16), fill=255)
+            self.display.draw.text((87, 23), str(cpu) + "LA", font=self.font(16), fill=255)
             self.display.draw.text((19, 43), ipv4, font=self.font(16), fill=255)
 
         self.display.show()
