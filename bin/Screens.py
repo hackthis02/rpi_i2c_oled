@@ -74,6 +74,7 @@ class Display:
 class BaseScreen:
     font_path = Utils.current_dir + "/fonts/PixelOperator.ttf"
     font_bold_path = Utils.current_dir + "/fonts/DejaVuSans-Bold.ttf"
+    font_icon = Utils.current_dir + "/fonts/lineawesome-webfont.ttf"
     fonts = {}
 
     def __init__(self, duration, display = Display(), utils = Utils(), config = None):
@@ -185,7 +186,7 @@ class BaseScreen:
        if (len(self.hint) > 2):
            draw.text((x_pos, 18), self.hint[2], font=font, fill=text_fill)
 
-    def font(self, size = None, is_bold = False):
+    def font(self, size = None, is_bold = False, is_icon = False):
         # default to the current screen's font size if none provided
         if not size:
            size = self.font_size
@@ -193,6 +194,8 @@ class BaseScreen:
         suffix = None
         if is_bold:
             suffix = '_bold'
+        elif is_icon:
+            suffix = '_icon'
 
         key = 'font_{}{}'.format(str(size), suffix)
 
@@ -200,6 +203,8 @@ class BaseScreen:
             font = BaseScreen.font_path
             if is_bold:
                 font = BaseScreen.font_bold_path
+            elif is_icon:
+                font = BaseScreen.font_icon
 
             font = ImageFont.truetype(font, int(size))
             BaseScreen.fonts[key] = font
@@ -542,16 +547,16 @@ class StatsScreen(BaseScreen):
             self.display.draw.text((0, 32), mem, font=self.font(16), fill=255)
             self.display.draw.text((0, 48), storage, font=self.font(16), fill=255)
         else:
-            self.display.draw.text((0, 3), chr(62609), font=icon_font, fill=255)
-            self.display.draw.text((65, 3), chr(62776), font=icon_font, fill=255)
-            self.display.draw.text((0, 23), chr(63426), font=icon_font, fill=255)
-            self.display.draw.text((65, 23), chr(62171), font=icon_font, fill=255)
-            self.display.draw.text((0, 43), chr(61931), font=icon_font, fill=255)
-            self.display.draw.text((19, 3), str(temp, 'utf-8'), font=font, fill=255)  
-            self.display.draw.text((87, 3), str(mem, 'utf-8'), font=font, fill=255)
-            self.display.draw.text((19, 23), str(storage, 'utf-8'), font=font, fill=255)
-            self.display.draw.text((87, 23), str(cpu, 'utf-8'), font=font, fill=255)
-            self.display.draw.text((19, 43), str(ipv4, 'utf-8'), font=font, fill=255)
+            self.display.draw.text((0, 3), chr(62609), font=self.font(18, is_icon=True), fill=255)
+            self.display.draw.text((65, 3), chr(62776), font=self.font(18, is_icon=True), fill=255)
+            self.display.draw.text((0, 23), chr(63426), font=self.font(18, is_icon=True), fill=255)
+            self.display.draw.text((65, 23), chr(62171), font=self.font(18, is_icon=True), fill=255)
+            self.display.draw.text((0, 43), chr(61931), font=self.font(18, is_icon=True), fill=255)
+            self.display.draw.text((19, 3), str(temp, 'utf-8'), font=self.font(16), fill=255)  
+            self.display.draw.text((87, 3), str(mem, 'utf-8'), font=self.font(16), fill=255)
+            self.display.draw.text((19, 23), str(storage, 'utf-8'), font=self.font(16), fill=255)
+            self.display.draw.text((87, 23), str(cpu, 'utf-8'), font=self.font(16), fill=255)
+            self.display.draw.text((19, 43), str(ipv4, 'utf-8'), font=self.font(16), fill=255)
 
         self.capture_screenshot()
         self.display.show()
